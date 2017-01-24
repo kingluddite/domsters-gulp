@@ -29,7 +29,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch([paths.js.all], ['bundlejs']);
+  gulp.watch([paths.js.all, './src/*.html'], ['bundlejs']);
 });
 
 gulp.task('default', ['connect', 'watch']);
