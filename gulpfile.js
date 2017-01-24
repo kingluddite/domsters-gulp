@@ -1,6 +1,9 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
     concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    sourcemaps = require('gulp-sourcemaps'),
+    rename = require('gulp-rename'),
     paths = {
       js: {
         all: ['./src/js/global.js',
@@ -16,7 +19,13 @@ var gulp = require('gulp'),
 
 gulp.task('bundlejs', function() {
     gulp.src(paths.js.all)
+        .pipe(sourcemaps.init())
         .pipe(concat('bundle.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(paths.js.dest))
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.js.dest))
         .pipe(connect.reload());
 });
