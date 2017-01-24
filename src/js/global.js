@@ -1,4 +1,5 @@
 function addLoadEvent( func ) {
+  console.log('yes');
   var oldonload = window.onload;
   if ( typeof window.onload != 'function' ) {
     window.onload = func;

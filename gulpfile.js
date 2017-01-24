@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
+    concat = require('gulp-concat'),
     paths = {
       js: {
         all: ['./src/js/global.js',
@@ -7,12 +8,28 @@ var gulp = require('gulp'),
              './src/js/contact.js',
              './src/js/index.js',
              './src/js/live.js',
-             './src/js/photos.js']
+             './src/js/photos.js'],
+        dest: './dist/js'
+
       }
     };
 
-gulp.task('connect', function() {
-  connect.server();
+gulp.task('bundlejs', function() {
+    gulp.src(paths.js.all)
+        .pipe(concat('bundle.js'))
+        .pipe(gulp.dest(paths.js.dest))
+        .pipe(connect.reload());
 });
 
-gulp.task('default', ['connect']);
+gulp.task('connect', function() {
+  connect.server({
+    root: './',
+    livereload: true
+  });
+});
+
+gulp.task('watch', function() {
+  gulp.watch([paths.js.all], ['bundlejs']);
+});
+
+gulp.task('default', ['connect', 'watch']);
