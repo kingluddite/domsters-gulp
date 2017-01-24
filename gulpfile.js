@@ -9,7 +9,7 @@ var gulp = require('gulp'),
              './src/js/index.js',
              './src/js/live.js',
              './src/js/photos.js'],
-        dest: './dist/js'
+        dest: 'dist/js'
 
       }
     };
