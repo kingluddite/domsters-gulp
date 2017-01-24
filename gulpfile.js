@@ -1,7 +1,12 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    connect = require('gulp-connect');
 
 gulp.task('demo', function() {
   console.log('Demo working');
 });
 
-gulp.task('default', ['demo']);
+gulp.task('connect', function() {
+  connect.server();
+});
+
+gulp.task('default', ['connect', 'demo']);
