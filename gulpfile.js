@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
     rename = require('gulp-rename'),
+    eslint = require('gulp-eslint'),
     paths = {
       js: {
         all: ['./src/js/global.js',
@@ -19,6 +20,8 @@ var gulp = require('gulp'),
 
 gulp.task('bundlejs', function() {
     gulp.src(paths.js.all)
+        .pipe(eslint())
+        .pipe(eslint.format())
         .pipe(sourcemaps.init())
         .pipe(concat('bundle.js'))
         .pipe(sourcemaps.write())
